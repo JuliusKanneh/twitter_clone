@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_clone_v1/constants/constants.dart';
+import 'package:twitter_clone_v1/features/auth/views/signup_view.dart';
 import 'package:twitter_clone_v1/theme/theme.dart';
 
 void main() {
@@ -14,10 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Twitter Clone',
       theme: AppTheme.theme,
-      home: Scaffold(
-        appBar: UIConstants.reusableAppBar(),
-        body: Container(),
-      ),
+      home: const SignUpView(),
     );
   }
 }
