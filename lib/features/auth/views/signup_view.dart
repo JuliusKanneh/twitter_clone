@@ -7,6 +7,9 @@ import 'package:twitter_clone_v1/features/auth/widgets/auth_field.dart';
 import 'package:twitter_clone_v1/theme/pallete.dart';
 
 class SignUpView extends StatefulWidget {
+  static route() => MaterialPageRoute(
+        builder: (context) => const SignUpView(),
+      );
   const SignUpView({super.key});
 
   @override
@@ -31,7 +34,7 @@ class _SignUpViewState extends State<SignUpView> {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 31),
             child: Column(
               children: [
                 AuthField(
