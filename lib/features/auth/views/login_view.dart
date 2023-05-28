@@ -42,9 +42,12 @@ class _LoginViewState extends State<LoginView> {
                 const SizedBox(height: 25),
                 AuthField(controller: passwordController, hintText: 'Password'),
                 const SizedBox(height: 40),
-                const Align(
+                Align(
                   alignment: Alignment.topRight,
-                  child: RoundedSmallButton(label: 'Done'),
+                  child: RoundedSmallButton(
+                    label: 'Done',
+                    onTap: () {},
+                  ),
                 ),
                 const SizedBox(height: 20),
                 RichText(
