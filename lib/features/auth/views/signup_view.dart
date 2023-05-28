@@ -31,7 +31,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
     super.dispose();
   }
 
-  void signUp() {
+  void onSignUp() {
     ///note: read() is used when calling functions.
     ///use .notifier to have access to the instance of provider so that u can all methods of that provider.
     ///this is only applicable to StateNotifierProvider.
@@ -74,7 +74,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                         alignment: Alignment.topRight,
                         child: RoundedSmallButton(
                           label: 'Done',
-                          onTap: signUp,
+                          onTap: onSignUp,
                         ),
                       ),
                       const SizedBox(height: 20),
