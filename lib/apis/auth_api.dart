@@ -21,7 +21,6 @@ abstract class IAuthAPI {
 
 final authAPIProvider = Provider((ref) {
   final account = ref.watch(appwriteAccountProvider);
-  account.get();
   return AuthAPI(account: account);
 });
 

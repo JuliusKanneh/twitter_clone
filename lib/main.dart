@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:twitter_clone_v1/common/common.dart';
-import 'package:twitter_clone_v1/common/loading_page.dart';
 import 'package:twitter_clone_v1/features/auth/controllers/auth_controller.dart';
 import 'package:twitter_clone_v1/features/auth/views/signup_view.dart';
 import 'package:twitter_clone_v1/features/home/home_view.dart';
@@ -25,10 +24,10 @@ class MyApp extends ConsumerWidget {
       theme: AppTheme.theme,
       home: ref.watch(currentUserAccountProvider).when(
             data: (user) {
-              if (user != null) {
-                print(user.email);
-                return const HomeView();
-              }
+              // if (user != null) {
+              //   print(user.email);
+              //   return const HomeView();
+              // }
               return const SignUpView();
             },
             error: (error, st) => ErrorPage(error: error.toString()),
