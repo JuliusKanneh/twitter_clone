@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:twitter_clone_v1/features/tweet/views/create_tweet_page.dart';
 import 'package:twitter_clone_v1/constants/constants.dart';
 import 'package:twitter_clone_v1/theme/pallete.dart';
 
@@ -22,6 +23,10 @@ class _HomeViewState extends State<HomeView> {
     setState(() {
       _page = index;
     });
+  }
+
+  void onTweetButtonPressed() {
+    Navigator.push(context, TweetView.route());
   }
 
   @override
@@ -58,6 +63,13 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: onTweetButtonPressed,
+        child: const Icon(
+          Icons.add,
+          color: Pallete.whiteColor,
+        ),
       ),
     );
   }

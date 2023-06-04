@@ -20,6 +20,17 @@ final currentUserAccountProvider = FutureProvider((ref) {
   return authController.currentUser();
 });
 
+final currentUserDetailsProvider = FutureProvider((ref) {
+  final uid = ref.watch(currentUserAccountProvider).value!.$id;
+  final userDetails = ref.watch(userDetailsProvider(uid));
+  return userDetails.value;
+});
+
+final userDetailsProvider = FutureProvider.family((ref, String uid) {
+  final authController = ref.watch(authControllerProvider.notifier);
+  return authController.getUserData(uid);
+});
+
 class AuthController extends StateNotifier<bool> {
   final AuthAPI _authAPI;
   final UserAPI _userAPI;
@@ -41,23 +52,24 @@ class AuthController extends StateNotifier<bool> {
       email: email,
       password: password,
     );
-    //create the user data.
-    UserModel userModel = UserModel(
-      uid: '\$id',
-      email: email,
-      name: getUsernameFromEmail(email),
-      followers: const [],
-      followings: const [],
-      bio: '',
-      profilePic: '',
-      bannerPic: '',
-      isTwitterBlue: false,
-    );
 
     state = false;
     res.fold(
       (l) => showSnackBar(context: context, content: l.message),
       (r) async {
+        //create the user data.
+        UserModel userModel = UserModel(
+          uid: r.$id,
+          email: email,
+          name: getUsernameFromEmail(email),
+          followers: const [],
+          followings: const [],
+          bio: '',
+          profilePic: '',
+          bannerPic: '',
+          isTwitterBlue: false,
+        );
+
         var res2 = await _userAPI.saveUserData(userModel);
         res2.fold(
           (l) {
@@ -93,5 +105,11 @@ class AuthController extends StateNotifier<bool> {
         Navigator.push(context, HomeView.route());
       },
     );
+  }
+
+  Future<UserModel> getUserData(String uid) async {
+    final document = await _userAPI.getUserData(uid);
+    final updatedUser = UserModel.fromMap(document.data);
+    return updatedUser;
   }
 }
