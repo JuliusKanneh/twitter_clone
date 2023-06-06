@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:twitter_clone_v1/common/common.dart';
@@ -17,42 +19,44 @@ class TweetView extends ConsumerStatefulWidget {
 class _TweetViewState extends ConsumerState<TweetView> {
   @override
   Widget build(BuildContext context) {
-    final currentUser = ref.read(currentUserDetailsProvider).value;
+    final currentUser = ref.watch(currentUserDetailsProvider).value;
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.close,
-            size: 30,
-          ),
-        ),
-        actions: [
-          RoundedSmallButton(
-            label: 'Tweet',
-            backgroundColor: Pallete.blueColor,
-            textColor: Pallete.whiteColor,
-            onTap: () {},
-          ),
-        ],
-      ),
-      body: const SafeArea(
-          child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    "",
-                  ),
+    return currentUser == null
+        ? const Loader()
+        : Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.close,
+                  size: 30,
+                ),
+              ),
+              actions: [
+                RoundedSmallButton(
+                  label: 'Tweet',
+                  backgroundColor: Pallete.blueColor,
+                  textColor: Pallete.whiteColor,
+                  onTap: () {},
                 ),
               ],
-            )
-          ],
-        ),
-      )),
-    );
+            ),
+            body: const SafeArea(
+                child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(
+                          "",
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )),
+          );
   }
 }
